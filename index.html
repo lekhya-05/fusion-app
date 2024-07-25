@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Photo Animation</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-image">
+            <span class="app-name">Fusion</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-item">Home</a></li>
+            <li><a href="#about" class="nav-item">About Us</a></li>
+            <li><a href="#contact" class="nav-item">Contact Us</a></li>
+        </ul>
+    </nav>
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='images/banner.jpg') }}" alt="Banner" class="banner-image">
+    </div>
+    <div class="container">
+        <h1 class="title">Create a Heartfelt Animation</h1>
+        <p class="description">Upload your photos and experience the sweetness of nostalgia as your present hugs your past in an animated visual memory.</p>
+        <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+            <div class="input-group">
+                <label for="younger" class="label">Past:</label>
+                <input type="file" name="younger" id="younger" class="file-input" required>
+            </div>
+            <div class="input-group">
+                <label for="older" class="label">Present:</label>
+                <input type="file" name="older" id="older" class="file-input" required>
+            </div>
+            <button type="submit" class="submit-button">Upload</button>
+        </form>
+        {% if filename %}
+            <div class="result">
+                <h2 class="result-title">Animation Result</h2>
+                <video controls>
+                    <source src="{{ url_for('output_file', filename=filename) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        {% endif %}
+    </div>
+
+    <div id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>At Fusion, we believe in the power of memories. Our mission is to help you relive the beautiful moments of your past by merging them seamlessly with the present. Our innovative animation technology brings your photos to life, creating a touching visual experience that you can cherish forever.</p>
+        <p>We are a team of passionate professionals dedicated to creating high-quality animations that evoke emotions and tell your unique story. Join us in celebrating the journey of life, one photo at a time.</p>
+    </div>
+
+    <div id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! If you have any questions, feedback, or need assistance, please reach out to us:</p>
+        <ul>
+            <li>Email: <a href="mailto:support@fusion.com">support@fusion.com</a></li>
+            <li>Phone: +1-234-567-890</li>
+            <li>Address: 123 Memory Lane, Nostalgia City, NY 56789</li>
+        </ul>
+        <p>Follow us on social media:</p>
+        <ul class="social-media">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
